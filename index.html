@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>jQuery Functions</title>
+	<link rel="stylesheet" href="style.css">
+	<script type="text/javascript" 
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">	
+	</script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+
+			var dfltPic = "counterparts";
+			var durationMs = 500;
+			$('h4 mark').text(durationMs);
+
+			var functions = {
+				'click': 		{'help':'Displays some text when you click the button',
+								  'pic':'test-for-echo'},
+				'hide': 		{'help':'Hides/ Shows the image',
+								  'pic':'grace-under-pressure'},
+				/*'show': 		{'help':'',
+								  'pic':''},*/
+				'toggle': 		{'help':'Toggles visibility of the image',
+								  'pic':'a-farewell-to-kings'},
+				'slideUp': 		{'help':'Slides Up/ Down the image',
+								  'pic':'vapor-trails'},
+				'slideToggle': 	{'help':'Performs the slideToggle effect',
+								  'pic':'moving-pictures'},
+				'fadeOut': 		{'help':'Fade the image out/in',
+								  'pic':'caress-of-steel'},
+				'addClass': 	{'help':'Add/remove the yellowOutline class from the image',
+								  'pic':'permanent-waves'},
+				'before': 		{'help':'Puts something before this text (outside the p tag)',
+								  'pic':'a-show-of-hands'},
+				'after': 		{'help':'Puts something after this text (outside the p tag)',
+								  'pic':'fly-by-night'},
+				'append': 		{'help':'Adds something inside of the p tag',
+								  'pic':'power-windows'},
+				'html': 		{'help':'Called with no arguments, gets the <b>HTML</b> from this text',
+								  'pic':'counterparts'},
+				'attr': 		{'help':'Gets the src attribute from this image',
+								  'pic':'signals'},
+				'val': 			{'help':'Type in the box, then press the val button to see what you typed',
+								  'pic':'different-stages'},
+				'text': 		{'help':'Change this text to something else',
+								  'pic':'hold-your-fire'},
+				'data': 		{'help':'Binds a counter to this button to track the number of times it is clicked',
+								  'pic':'roll-the-bones'}
+
+			}; 
+
+			// add a button and p tag to each article. button says the function name
+			// p tag displays the help message
+			for(var f in functions){
+				$('#wrapper').append('<section class="'+f+'"></section>')
+				sec = 'section.'+f;
+				$(sec).append('<img></img>')
+				$(sec).append('<article></article>')
+
+				// populate image 
+				img = sec + ' > img';
+				if(functions[f].pic){
+					pic = functions[f].pic;
+				}else{
+					pic = dfltPic;
+				}
+				$(img).attr('src','img/'+pic+'.jpg');
+				
+				// populate article with button and help text 
+				art = sec + ' > article';
+				 // button
+				$(art).append('<button>'+f+'</button>');
+
+				 // help text
+				$(art).append('<p>'+functions[f].help)+'</p>';
+			}
+
+			// change the buttons when hovered
+			$('button').hover(
+				function(e){
+					$(e.target).css('color', 'purple');
+				},
+				function(){
+					$('button').css('color', 'black');
+				}
+			);
+			// log a message when any button clicked
+			$('button').click(function(){
+				// button < article < section, where section has the class
+				cls = this.parentElement.parentElement.className;
+				console.log('.' + cls + '() clicked')
+			});
+
+			// detect new duration values 
+			$("#durationInput").keyup(function() {
+				durationMs = $("#durationInput").val();
+				$('h4 mark').text(durationMs);
+			});
+
+			// add a form to the .val section
+			$('.val article').append('<input type="text" id="testVal">');
+			$('.val article').append('<p id="valAnswer" class="response"></p>');
+
+			// add a <mark> in the .data section
+			$('.data article').append("<p class='response'>You've clicked the button <mark>0</mark> times.</p>")
+
+			// ---------------------------------------//
+			// define what each button does
+			$('.click button').click(function(){
+				$('.click p').addClass('response');
+				$('.click p').text('You clicked the button!');
+			}) ;
+
+			$('.hide button').click(function(){
+				button = this;
+				console.log('duration',durationMs);
+				if($('.hide > img').is(':visible')){
+					$('.hide > img').hide(
+						durationMs, // this doesnt seem to be picking up
+						 function(){ // TODO: ask how to specify complete and duration
+							$(button).html('show');
+						});
+					
+				}else{
+					$('.hide > img').show(
+						durationMs,
+						function(){
+							$(button).html('hide');
+						});
+					
+				}
+			});
+
+			$('.toggle button').click(function(){
+				$('.toggle > img').toggle(durationMs);
+			});
+
+			$('.slideUp button').click(function(){
+				button = this;
+				if($('.slideUp > img').is(':visible')){
+					$('.slideUp > img').slideUp(
+						durationMs,
+						function(){
+							$(button).html('slideDown');
+						});
+					
+				}else{
+					$('.slideUp > img').slideDown(
+						durationMs, 
+						function(){
+							$(button).html('slideUp')
+						});
+				}
+			});
+
+			$('.slideToggle button').click(function(){
+				$('.slideToggle > img').slideToggle(durationMs);
+			}) ;
+
+			$('.fadeOut button').click(function(){
+				button = this;
+				if( $('.fadeOut > img').is(':visible') ){
+					$('.fadeOut > img').fadeOut(
+						durationMs,
+						function(){
+							$(button).html('fadeIn');
+						});
+					
+				}else{
+					$('.fadeOut > img').fadeIn(
+						durationMs, 
+						function(){
+							$(button).html('fadeOut');
+						});
+				}
+			});
+
+			$('.fadeIn button').click(function(){
+				$('.fadeIn > img').fadeIn(durationMs);
+			});
+
+			$('.addClass button').click(function(){
+				img = $('.addClass > img');
+				button = this;
+				if(img.hasClass('yellowOutline')){
+					$(img).removeClass('yellowOutline');
+					$(button).text('addClass');
+				}else{
+					$(img).addClass('yellowOutline');
+					$(button).text('removeClass');
+				}
+			});
+
+			$('.before button').click(function(){
+				$('.before p').not($('.response')).before("<p class='response'>&#187;</p>");
+			})
+
+			$('.after button').click(function(){
+				$('.after p').not($('.response')).after("<p class='response'>&#171;</p>");
+				/* TOUCHE jQuery!!! If you dont filter out previous responses
+				you get exponentially many arrows, since the responses are also
+				<p> tags*/
+			})
+
+			$('.append button').click(function(){
+				$('.append p').append('<ul class="response"><li>thing 1</li><li>thing 2</li></ul>')
+			})
+
+			$('.html button').click(function(){
+				html = $('.html p').html();
+				
+				$('.html p').text(html);
+				$('.html p').addClass('response');
+			})
+
+			$('.attr button').click(function(){
+				src = $('.attr > img').attr('src');
+				$('.attr p').text(src);
+				$('.attr p').addClass('response');
+			})
+
+			$('.val button').click(function(){
+				val = $('#testVal').val();
+				$('#valAnswer').text(val);
+				$('#valAnswer').addClass('response');
+			})
+
+			$('.text button').click(function(){
+				$('.text p').text('This is new text');
+				$('.text p').addClass('response');
+			});
+
+			$('.data button').click(function(){
+				n = $(this).data()['n'];
+				if(n){
+					$(this).data()['n'] ++ ;
+				}else{
+					$(this).data({'n': 1});
+				}
+				//console.log($(this).data()['n'])
+				$('.data mark').text($(this).data()['n']);
+			});
+		});
+
+	</script>
+
+</head>
+<body>
+	<header>
+		<h1>Some jQuery Functions</h1>
+	</header>
+	<main>
+		
+		<div id="wrapper">
+			<h4>Animations will last for <mark></mark> milliseconds</h4>
+			<form action="">
+				<label for="duration">Or enter another duration (in ms):</label>
+				<input type="number" id="durationInput">
+			</form>
+
+		</div>
+		
+	</main>
+
+
+</body>
+</html>

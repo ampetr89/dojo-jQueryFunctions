@@ -1,0 +1,85 @@
+* {
+	padding: 0;
+	margin: 0;
+}
+body{
+	/*background: linear-gradient( to left top, white, gray);*/
+	background-color: #e6e6ff;
+	height: 100%;
+	
+	font-family: sans-serif;
+}
+header, main{
+	margin: 0 auto;
+	text-align: center;
+}
+main{
+	width: 850px;
+	background-color: #9999ff;
+	padding: 10px ;
+	text-align: center;
+	border-radius: 10px;
+}
+h4{
+	margin-top: 20px;
+}
+#wrapper{
+	width: 700px;
+	margin: 0 auto;
+	/*border: 2px black solid;*/
+}
+input[type="number"]{
+	margin-bottom: 30px;
+	color:green;
+	text-align: center;
+	height: 1.5em;
+}
+label{
+	display: block;
+}
+
+section{
+	height: 110px;
+	border: 1px rgb(204,204,255) solid;
+	border-radius: 5px;
+	display: block;
+	margin: 4px;
+	padding: 2px 4px ;
+	text-align: left;
+}
+img{
+	overflow: hidden;
+	width: 150px;
+	height: 110px;
+}
+article{
+	/*position: absolute;
+	left: 510px;*/
+	/*border: 1px orange dashed;*/
+	padding: 6px;
+	width: auto;/*calc(100% - 150px -12px);*/
+	text-align: left;
+}
+img, article{
+	vertical-align: top;	
+	display: inline-block;
+}
+
+button{
+	padding: 2px 8px;
+	border-radius: 3px;
+}
+.yellowOutline{
+	outline: 4px yellow solid;
+}
+
+.append p, .before p, .after p{
+	border: 1px blue solid;	
+}
+
+ul{
+	margin-left: 25px;
+}
+.response{
+	color: white;
+}

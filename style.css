@@ -38,6 +38,7 @@ label{
 	display: block;
 }
 
+
 section{
 	height: 110px;
 	border: 1px rgb(204,204,255) solid;
@@ -46,6 +47,11 @@ section{
 	margin: 4px;
 	padding: 2px 4px ;
 	text-align: left;
+}
+
+div{
+	display: inline-block;
+	width: 150px;
 }
 img{
 	overflow: hidden;

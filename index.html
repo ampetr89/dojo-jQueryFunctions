@@ -54,18 +54,18 @@
 			for(var f in functions){
 				$('#wrapper').append('<section class="'+f+'"></section>')
 				sec = 'section.'+f;
-				$(sec).append('<img></img>')
+				$(sec).append('<div><img></img></div>')
 				$(sec).append('<article></article>')
 
 				// populate image 
-				img = sec + ' > img';
+				img = sec + ' > div > img';
 				if(functions[f].pic){
 					pic = functions[f].pic;
 				}else{
 					pic = dfltPic;
 				}
 				$(img).attr('src','img/'+pic+'.jpg');
-				
+
 				// populate article with button and help text 
 				art = sec + ' > article';
 				 // button
@@ -74,6 +74,13 @@
 				 // help text
 				$(art).append('<p>'+functions[f].help)+'</p>';
 			}
+
+			// set the div height
+			/*$('img').on('load', function(){
+				var imgHeight = $('img').css('height');
+				console.log(imgHeight)
+				$('div').not($('#wrapper')).css('height', imgHeight);
+			});*/
 
 			// change the buttons when hovered
 			$('button').hover(
@@ -114,15 +121,15 @@
 			$('.hide button').click(function(){
 				button = this;
 				console.log('duration',durationMs);
-				if($('.hide > img').is(':visible')){
-					$('.hide > img').hide(
+				if($('.hide > div > img').is(':visible')){
+					$('.hide > div > img').hide(
 						durationMs, // this doesnt seem to be picking up
 						 function(){ // TODO: ask how to specify complete and duration
 							$(button).html('show');
 						});
 					
 				}else{
-					$('.hide > img').show(
+					$('.hide > div > img').show(
 						durationMs,
 						function(){
 							$(button).html('hide');
@@ -132,20 +139,20 @@
 			});
 
 			$('.toggle button').click(function(){
-				$('.toggle > img').toggle(durationMs);
+				$('.toggle > div > img').toggle(durationMs);
 			});
 
 			$('.slideUp button').click(function(){
 				button = this;
-				if($('.slideUp > img').is(':visible')){
-					$('.slideUp > img').slideUp(
+				if($('.slideUp > div > img').is(':visible')){
+					$('.slideUp > div > img').slideUp(
 						durationMs,
 						function(){
 							$(button).html('slideDown');
 						});
 					
 				}else{
-					$('.slideUp > img').slideDown(
+					$('.slideUp > div > img').slideDown(
 						durationMs, 
 						function(){
 							$(button).html('slideUp')
@@ -154,20 +161,20 @@
 			});
 
 			$('.slideToggle button').click(function(){
-				$('.slideToggle > img').slideToggle(durationMs);
+				$('.slideToggle > div > img').slideToggle(durationMs);
 			}) ;
 
 			$('.fadeOut button').click(function(){
 				button = this;
-				if( $('.fadeOut > img').is(':visible') ){
-					$('.fadeOut > img').fadeOut(
+				if( $('.fadeOut > div > img').is(':visible') ){
+					$('.fadeOut > div > img').fadeOut(
 						durationMs,
 						function(){
 							$(button).html('fadeIn');
 						});
 					
 				}else{
-					$('.fadeOut > img').fadeIn(
+					$('.fadeOut > div > img').fadeIn(
 						durationMs, 
 						function(){
 							$(button).html('fadeOut');
@@ -176,11 +183,11 @@
 			});
 
 			$('.fadeIn button').click(function(){
-				$('.fadeIn > img').fadeIn(durationMs);
+				$('.fadeIn > div > img').fadeIn(durationMs);
 			});
 
 			$('.addClass button').click(function(){
-				img = $('.addClass > img');
+				img = $('.addClass > div > img');
 				button = this;
 				if(img.hasClass('yellowOutline')){
 					$(img).removeClass('yellowOutline');
@@ -214,7 +221,7 @@
 			})
 
 			$('.attr button').click(function(){
-				src = $('.attr > img').attr('src');
+				src = $('.attr > div > img').attr('src');
 				$('.attr p').text(src);
 				$('.attr p').addClass('response');
 			})
@@ -254,7 +261,7 @@
 		<div id="wrapper">
 			<h4>Animations will last for <mark></mark> milliseconds</h4>
 			<form action="">
-				<label for="duration">Or enter another duration (in ms):</label>
+				<label for="duration">Or enter another duration (in ms)... <em>JK this feature is not working!</em></label>
 				<input type="number" id="durationInput">
 			</form>
 

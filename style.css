@@ -56,7 +56,7 @@ div{
 img{
 	overflow: hidden;
 	width: 150px;
-	height: 110px;
+	/*height: 110px;*/
 }
 article{
 	/*position: absolute;

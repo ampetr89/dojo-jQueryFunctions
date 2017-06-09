@@ -4,4 +4,4 @@ Learn about 18 common jQuery functions. Each button lets you run a different fun
 
 **Note** The form at the top to change the animation duration is currently not working :-/
 
-Page is live here: https://ampetr89.github.io/dojo-jQueryFunctions/
+Page is live here: https://ampetr89.github.io/dojo-wf-jQueryFunctions/
